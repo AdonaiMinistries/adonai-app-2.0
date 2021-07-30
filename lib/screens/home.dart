@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => SermonsBloc()..add(LoadSermonsEvent())),
+              create: (context) => SermonsBloc()..add(GetAppConfigEvent())),
         ],
         child: ("tv" == DeviceDetector.deviceType(MediaQuery.of(context)))
             ? TvHomeScreen()

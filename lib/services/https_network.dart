@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:adonai_2/models/App_config.dart';
 import 'package:adonai_2/models/Sermon_config.dart';
 import 'package:adonai_2/models/Sermons.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +12,7 @@ class DataService {
 
   String _uri = '/users/140653357/projects/4496867/videos';
 
-  Future<List<Sermon>> getSermons() async {
+  Future<List<Sermon>> getSermons(String token) async {
     try {
       List<Sermon> sermons = [];
 
@@ -19,7 +20,7 @@ class DataService {
       do {
         final Response response =
             await http.get(Uri.parse(_baseUri + _uri), headers: {
-          "Authorization": "Bearer f146ca9760ce7e79c962f5acff471b19",
+          "Authorization": "Bearer $token",
           "Content-Type": "application/json"
         });
 
@@ -56,15 +57,17 @@ class DataService {
     }
   }
 
-  Future getFileFromServer() async{
+  Future<AppConfig> getFileFromServer() async{
     final String _baseUrl = 'www.adonaichurch.in';
 
-    Uri uri = Uri.https(_baseUrl, '/auth.js');
+    Uri uri = Uri.https(_baseUrl, '/app-config.json');
 
     try {
       Response resp = await http.get(uri);
-      print ((resp.body).toString());
+      final appConfig = AppConfig.fromJson(jsonDecode(resp.body));
+      return appConfig;
     } catch (e) {
+      throw e;
     }
   }
 }

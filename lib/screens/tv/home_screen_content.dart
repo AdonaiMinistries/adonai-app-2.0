@@ -2,14 +2,18 @@ import 'dart:ui';
 
 import 'package:adonai_2/bloc/sermons_state.dart';
 import 'package:adonai_2/constants/theme_info.dart';
+import 'package:adonai_2/models/Live_config.dart';
 import 'package:adonai_2/models/video_player_config.dart';
 import 'package:adonai_2/screens/tv/sermons_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenContent extends StatelessWidget {
   final LoadedSermonsState state;
+  final LiveConfig liveConfig;
 
-  const HomeScreenContent({Key? key, required this.state}) : super(key: key);
+  const HomeScreenContent(
+      {Key? key, required this.state, required this.liveConfig})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +44,10 @@ class HomeScreenContent extends StatelessWidget {
           left: MediaQuery.of(context).size.width * .05,
           right: MediaQuery.of(context).size.width * .05),
       child: SingleChildScrollView(
-        child: Column(
-            children: <Widget>[LiveButton(), _displayTextSermon(context)]),
+        child: Column(children: <Widget>[
+          LiveButton(url: liveConfig.url),
+          _displayTextSermon(context)
+        ]),
       ),
     );
   }
@@ -73,6 +79,9 @@ class HomeScreenContent extends StatelessWidget {
 }
 
 class LiveButton extends StatefulWidget {
+  final String url;
+
+  const LiveButton({Key? key, required this.url}) : super(key: key);
   @override
   _LiveButtonState createState() => _LiveButtonState();
 }
@@ -106,15 +115,7 @@ class _LiveButtonState extends State<LiveButton> {
     return TextButton(
       focusNode: _focus,
       onPressed: () => Navigator.of(context).pushNamed("/videoPlayerScreen",
-          arguments: new VideoConfig(
-              url:
-                  // "http://media.adonaichurch.in:5080/LiveApp/streams/472418047254289574809745.m3u8",
-                  "https://hls.media.adonaichurch.in/hls/test.m3u8",
-              isLive: true)
-
-          // "http://media.adonaichurch.in:5080/LiveApp/streams/472418047254289574809745.m3u8"
-          // "rtmps://rtmp-global.cloud.vimeo.com:443/live/e72405aa-3652-4d98-9752-24bdf39f94c7"
-          ),
+          arguments: new VideoConfig(url: widget.url, isLive: true)),
       child: Text(
         "LIVE",
         style: TextStyle(color: _textColor),

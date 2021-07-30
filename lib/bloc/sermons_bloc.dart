@@ -6,18 +6,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SermonsBloc extends Bloc<SermonsEvent, SermonsState> {
   final _dataService = DataService();
 
-  SermonsBloc() : super(LoadingSermonsState());
+  SermonsBloc() : super(LoadingAppConfigState());
 
   @override
   Stream<SermonsState> mapEventToState(SermonsEvent event) async* {
-    if (event is LoadSermonsEvent) {
-      /* Inital state is loading sermons. */
-      yield LoadingSermonsState();
+    if (event is GetAppConfigEvent) {
+      yield LoadingAppConfigState();
       try {
-        final sermons = await _dataService.getSermons();
+        final appConfig = await _dataService.getFileFromServer();
+        yield LoadedAppConfigState(appConfig: appConfig);
+
+        final sermons = await _dataService.getSermons(appConfig.config.token);
         yield LoadedSermonsState(sermons: sermons);
+
       } catch (e) {
-        yield FailedToLoadSermonsState(error: e);
+        throw e;
       }
     }
   }

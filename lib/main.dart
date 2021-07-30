@@ -1,5 +1,7 @@
 import 'package:adonai_2/app_navigator.dart';
-import 'package:adonai_2/constants/theme_info.dart';
+import 'package:adonai_2/screens/home.dart';
+import 'package:adonai_2/widgets/tv/Loading_widget.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,7 +19,12 @@ class AdonaiApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Gotham'),
-        initialRoute: '/',
+        // home: AnimatedSplashScreen(
+        //   nextScreen: Home(),
+        //   splash: LoadingWidget(),
+        //   duration: 3000,
+        // ),
+        initialRoute: "/",
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

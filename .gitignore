@@ -8,3 +8,7 @@ build/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+.DS_Store
+.DS_Store
+.DS_Store
+*.lock
