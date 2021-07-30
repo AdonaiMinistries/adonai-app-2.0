@@ -19,12 +19,12 @@ class AdonaiApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Gotham'),
-        // home: AnimatedSplashScreen(
-        //   nextScreen: Home(),
-        //   splash: LoadingWidget(),
-        //   duration: 3000,
-        // ),
-        initialRoute: "/",
+        home: AnimatedSplashScreen(
+          nextScreen: Home(),
+          splash: LoadingWidget(),
+          duration: 3000,
+        ),
+        // initialRoute: "/",
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

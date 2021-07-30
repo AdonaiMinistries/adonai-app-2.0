@@ -52,7 +52,10 @@ class _TvHomeScreenState extends State<TvHomeScreen> {
   }
 
   Widget _loadingWidget() {
-    return LoadingWidget();
+    // return LoadingWidget();
+    return CircularProgressIndicator(
+      color: Colors.red,
+    );
   }
 
   Widget _loadConent(LoadedSermonsState state) {
