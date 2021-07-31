@@ -19,10 +19,10 @@ class _LoadingWidgetState extends State<LoadingWidget> {
         VideoPlayerController.asset("videos/SplashScreen.mp4");
     _chewieController = ChewieController(
         videoPlayerController: _videoPlayerController,
+        fullScreenByDefault: true,
         autoPlay: true,
         autoInitialize: true,
         showControls: false);
-    // _videoPlayerController.initialize();
   }
 
   void dispose() {
@@ -32,7 +32,6 @@ class _LoadingWidgetState extends State<LoadingWidget> {
   }
 
   Widget build(BuildContext context) {
-    // // return Image.asset("videos/sample_gif.gif");
-    return Chewie(controller: _chewieController);
+    return VideoPlayer(_videoPlayerController);
   }
 }

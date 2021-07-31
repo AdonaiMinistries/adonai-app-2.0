@@ -52,10 +52,7 @@ class _TvHomeScreenState extends State<TvHomeScreen> {
   }
 
   Widget _loadingWidget() {
-    // return LoadingWidget();
-    return CircularProgressIndicator(
-      color: Colors.red,
-    );
+    return LoadingWidget();
   }
 
   Widget _loadConent(LoadedSermonsState state) {
@@ -74,11 +71,7 @@ class _TvHomeScreenState extends State<TvHomeScreen> {
     _liveConfig = LiveConfig(
         url: state.appConfig.config.stream.link,
         time: state.appConfig.config.stream.nextStream);
-    return Center(
-      child: CircularProgressIndicator(
-        color: Colors.red,
-      ),
-    );
+    return _loadingWidget();
   }
 
   Widget _errorWidget() {
