@@ -47,23 +47,19 @@ class _TimerClockScreenState extends State<TimerClockScreen> {
     var _currTime = DateTime.now();
 
     var _days = liveTime.difference(_currTime).inDays;
-    var _hours = (liveTime.difference(_currTime).inHours).round();
-    var _min = (liveTime.difference(_currTime).inMinutes).round();
     var _sec = (liveTime.difference(_currTime).inSeconds).round();
 
-    _min = ((_min > 60) ? (_min / 1440) : _min).toInt();
-
-    _sec = ((_sec > 60) ? (_sec / 3600) : _sec).toInt();
-
-    if (_days == 0 && _hours == 0 && _min == 0) {
+    if ((_days == 0 && _sec == 0) ||
+        ((_days.isNegative) || (_sec.isNegative))) {
       setState(() => Navigator.of(context).pushNamed("/videoPlayerScreen",
           arguments:
               new VideoConfig(url: widget.liveConfig.url, isLive: true)));
     }
 
     setState(() {
+      var _timeStr = (Duration(seconds: _sec)).toString().split(":");
       _timeDiff =
-          "$_days : Day(s) - $_hours : Hours - $_min : Minutes - $_sec : Seconds";
+          "Day(s) - $_days Hours - ${_timeStr[0]} Minutes - ${_timeStr[1]} Seconds - ${(_timeStr[2].split("."))[0]}";
     });
   }
 
