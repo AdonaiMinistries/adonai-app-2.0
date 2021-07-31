@@ -7,9 +7,9 @@ import 'package:adonai_2/models/video_player_config.dart';
 import 'package:adonai_2/services/https_network.dart';
 import 'package:adonai_2/utils/string_utils.dart';
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class VideoScreen extends StatefulWidget {
   final Sermon sermon;
@@ -101,7 +101,6 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget _displayTitle(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * .25,
-      // height: MediaQuery.of(context).size.height * .30,
       child: AutoSizeText(
         widget.sermon.title,
         style: TextStyle(color: Colors.white, fontSize: 30),
@@ -113,7 +112,6 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget _displayDescription(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * .35,
-      // height: MediaQuery.of(context).size.height * .20,
       child: AutoSizeText(
         widget.sermon.description,
         style: TextStyle(color: Colors.white, fontSize: 15),
@@ -151,9 +149,15 @@ class _VideoScreenState extends State<VideoScreen> {
       height: MediaQuery.of(context).size.height * .55,
       child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.network(
-            widget.sermon.thumbnails[4].url,
-          )),
+          child: CachedNetworkImage(
+            imageUrl: widget.sermon.thumbnails[4].url,
+            placeholder: (context, url) =>
+                Center(child: CircularProgressIndicator(color: Colors.red)),
+          )
+          // child: Image.network(
+          //   widget.sermon.thumbnails[4].url,
+          // )
+          ),
     );
   }
 
@@ -253,4 +257,3 @@ class _ButtonHandlerState extends State<ButtonHandler> {
         ));
   }
 }
-
