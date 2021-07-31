@@ -1,9 +1,12 @@
 import 'package:adonai_2/models/Sermons.dart';
 import 'package:adonai_2/models/video_player_config.dart';
 import 'package:adonai_2/screens/home.dart';
+import 'package:adonai_2/screens/tv/timer_clock.dart';
 import 'package:adonai_2/screens/tv/video_player.dart';
 import 'package:adonai_2/screens/tv/video_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'models/Live_config.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -19,6 +22,11 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => VideoPlayerScreen(
                 videoConfig: settings.arguments as VideoConfig));
+      case "/timerClockScreen":
+        return MaterialPageRoute(
+            builder: (context) => TimerClockScreen(
+                  liveConfig: settings.arguments as LiveConfig,
+                ));
       default:
         return _errorRoute();
     }
