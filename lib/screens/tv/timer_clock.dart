@@ -28,13 +28,19 @@ class _TimerClockScreenState extends State<TimerClockScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black87,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Next Service"),
+            Text("Next Service",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30)),
             SizedBox(height: MediaQuery.of(context).size.height * .03),
-            Text("${DateFormat.yMMMMEEEEd().add_jms().format(_liveTime)}"),
+            Text("${DateFormat.yMMMMEEEEd().add_jms().format(_liveTime)}",
+                style: TextStyle(color: Colors.white)),
             SizedBox(height: MediaQuery.of(context).size.height * .05),
             Text(_timeDiff, style: TextStyle(color: Colors.red)),
           ],
@@ -45,6 +51,7 @@ class _TimerClockScreenState extends State<TimerClockScreen> {
 
   _getTimeDifference(liveTime) {
     var _currTime = DateTime.now();
+    print(DateFormat.yMd().add_jms().format(_currTime));
 
     var _days = liveTime.difference(_currTime).inDays;
     var _sec = (liveTime.difference(_currTime).inSeconds).round();
@@ -62,30 +69,4 @@ class _TimerClockScreenState extends State<TimerClockScreen> {
           "Day(s) - $_days Hours - ${_timeStr[0]} Minutes - ${_timeStr[1]} Seconds - ${(_timeStr[2].split("."))[0]}";
     });
   }
-
-  // String _formatDateTime(DateTime dateTime) {
-  //   // return DateFormat.yMMMMd().format(dateTime);
-  //   print(DateFormat.yMd().add_jms().format(dateTime));
-  //   return DateFormat.yMMMMEEEEd().add_jms().format(dateTime);
-  // }
-
-  // _parseTime(timeNow) {
-  //   String _time = "Monday, August 2, 2021 3:00:00 AM";
-
-  //   var _futureTime = DateFormat.yMMMMEEEEd().add_jms().parse(_time);
-  //   var _days = _futureTime.difference(timeNow).inDays;
-  //   var _hours = (_futureTime.difference(timeNow).inHours).round();
-  //   var _inmin = (_futureTime.difference(timeNow).inMinutes).round();
-
-  //   _inmin = ((_inmin > 60) ? (_inmin / 1440) : (_inmin)).toInt();
-  //   print("Days - $_days, Hours - $_hours, Minutes - $_inmin");
-  // }
-
-  // void _getTime(t) {
-  //   final DateTime now = DateTime.now();
-  //   final String formattedDateTime = _formatDateTime(now);
-  //   setState(() {
-  //     _timeDiff = formattedDateTime;
-  //   });
-  // }
 }

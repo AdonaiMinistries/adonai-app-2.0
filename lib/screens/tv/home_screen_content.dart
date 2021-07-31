@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:adonai_2/bloc/sermons_state.dart';
 import 'package:adonai_2/constants/theme_info.dart';
 import 'package:adonai_2/models/Live_config.dart';
+import 'package:adonai_2/models/video_player_config.dart';
 import 'package:adonai_2/screens/tv/sermons_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -113,10 +114,10 @@ class _LiveButtonState extends State<LiveButton> {
   Widget build(BuildContext context) {
     return TextButton(
       focusNode: _focus,
-      // onPressed: () => Navigator.of(context).pushNamed("/videoPlayerScreen",
-      //     arguments: new VideoConfig(url: widget.url, isLive: true)),
-      onPressed: () => Navigator.of(context)
-          .pushNamed("/timerClockScreen", arguments: widget.liveConfig),
+      onPressed: () => Navigator.of(context).pushNamed("/videoPlayerScreen",
+          arguments: new VideoConfig(url: widget.liveConfig.url, isLive: true)),
+      // onPressed: () => Navigator.of(context)
+      //     .pushNamed("/timerClockScreen", arguments: widget.liveConfig),
       child: Text(
         "LIVE",
         style: TextStyle(color: _textColor),
