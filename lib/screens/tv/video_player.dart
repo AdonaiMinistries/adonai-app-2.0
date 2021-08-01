@@ -1,3 +1,4 @@
+import 'package:adonai_2/constants/theme_info.dart';
 import 'package:adonai_2/models/video_player_config.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,87 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late var _focusNode = FocusNode();
   late int _tmpHashCode = 0;
   late var _focusControl = FocusNode();
+
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {});
+    _focusControl.addListener(() {});
+
+    /* Disable screen sleep. */
+    Wakelock.enabled;
+    _initController();
+
+    _focusNode.requestFocus();
+  }
+
+  void dispose() {
+    super.dispose();
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
+    _focusNode.dispose();
+    _focusControl.dispose();
+    /* Enable screen sleep. */
+    Wakelock.disable();
+  }
+
+  Widget build(BuildContext context) {
+    try {
+      return WillPopScope(
+        onWillPop: () async {
+          if (widget.videoConfig.isLive) {
+            Navigator.of(context).pop();
+          }
+          return true;
+        },
+        child: Scaffold(
+          body: Chewie(controller: _chewieController),
+        ),
+      );
+    } catch (e) {
+      print(e);
+      return Container(child: Text("Exception caught => $e"));
+    }
+  }
+
+  Widget _popOnFailed() {
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Failed to load,",
+            style: VideoPlayerThemeData.textTheme(Colors.grey)),
+        Text("please try again later.",
+            style: VideoPlayerThemeData.textTheme(Colors.grey)),
+        TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text("Go Back"))
+      ],
+    ));
+  }
+
+  void _initController() {
+    _videoPlayerController =
+        VideoPlayerController.network(widget.videoConfig.url);
+    _chewieController = ChewieController(
+      fullScreenByDefault: true,
+      autoInitialize: true,
+      videoPlayerController: _videoPlayerController,
+      aspectRatio: 16 / 9,
+      autoPlay: true,
+      showOptions: false,
+      isLive: widget.videoConfig.isLive,
+      allowedScreenSleep: false,
+      showControls: true,
+      errorBuilder: (context, errorMessage) {
+        return _popOnFailed();
+      },
+      overlay: RawKeyboardListener(
+        focusNode: _focusNode,
+        onKey: _handleKeyEvent,
+        child: Container(),
+      ),
+    );
+  }
 
   void _handleKeyEvent(RawKeyEvent event) {
     /* For live videos we cant play pause or seek the video. */
@@ -65,53 +147,5 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       }
     }
     _chewieController.seekTo(Duration(seconds: _timeToSeek));
-  }
-
-  void initState() {
-    super.initState();
-    _videoPlayerController =
-        VideoPlayerController.network(widget.videoConfig.url);
-    _focusNode.addListener(() {});
-    _focusControl.addListener(() {});
-
-    /* Disable screen sleep. */
-    Wakelock.enabled;
-
-    _chewieController = ChewieController(
-      fullScreenByDefault: true,
-      autoInitialize: true,
-      videoPlayerController: _videoPlayerController,
-      aspectRatio: 16 / 9,
-      autoPlay: true,
-      showOptions: false,
-      isLive: widget.videoConfig.isLive,
-      allowedScreenSleep: false,
-      showControls: true,
-      errorBuilder: (context, errorMessage) =>
-          Center(child: Text(errorMessage)),
-      overlay: RawKeyboardListener(
-        focusNode: _focusNode,
-        onKey: _handleKeyEvent,
-        child: Container(),
-      ),
-    );
-
-    _focusNode.requestFocus();
-  }
-
-  void dispose() {
-    super.dispose();
-    _videoPlayerController.dispose();
-    _chewieController.dispose();
-    _focusNode.dispose();
-    _focusControl.dispose();
-    /* Enable screen sleep. */
-    Wakelock.disable();
-  }
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Chewie(controller: _chewieController),
-    );
   }
 }

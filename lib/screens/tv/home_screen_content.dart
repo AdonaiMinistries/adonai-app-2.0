@@ -114,10 +114,10 @@ class _LiveButtonState extends State<LiveButton> {
   Widget build(BuildContext context) {
     return TextButton(
       focusNode: _focus,
-      onPressed: () => Navigator.of(context).pushNamed("/videoPlayerScreen",
-          arguments: new VideoConfig(url: widget.liveConfig.url, isLive: true)),
-      // onPressed: () => Navigator.of(context)
-      //     .pushNamed("/timerClockScreen", arguments: widget.liveConfig),
+      // onPressed: () => Navigator.of(context).pushNamed("/videoPlayerScreen",
+      //     arguments: new VideoConfig(url: widget.liveConfig.url, isLive: true)),
+      onPressed: () => Navigator.of(context)
+          .pushNamed("/timerClockScreen", arguments: widget.liveConfig),
       child: Text(
         "LIVE",
         style: TextStyle(color: _textColor),
