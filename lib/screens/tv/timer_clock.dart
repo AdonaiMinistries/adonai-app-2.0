@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:adonai_2/constants/theme_info.dart';
-import 'package:adonai_2/models/Live_config.dart';
-import 'package:adonai_2/models/video_player_config.dart';
-import 'package:adonai_2/screens/tv/video_player.dart';
+import 'package:adonai/constants/theme_info.dart';
+import 'package:adonai/models/Live_config.dart';
+import 'package:adonai/models/video_player_config.dart';
+import 'package:adonai/screens/tv/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

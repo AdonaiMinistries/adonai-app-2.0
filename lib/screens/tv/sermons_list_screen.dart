@@ -1,5 +1,5 @@
-import 'package:adonai_2/models/Sermons.dart';
-import 'package:adonai_2/widgets/tv/Sermon_tile.dart';
+import 'package:adonai/models/Sermons.dart';
+import 'package:adonai/widgets/tv/Sermon_tile.dart';
 import 'package:flutter/material.dart';
 
 class SermonsList extends StatelessWidget {

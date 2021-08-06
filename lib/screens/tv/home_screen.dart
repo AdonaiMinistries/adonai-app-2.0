@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:adonai_2/bloc/sermons_state.dart';
-import 'package:adonai_2/bloc/sermons_bloc.dart';
-import 'package:adonai_2/models/Live_config.dart';
-import 'package:adonai_2/screens/tv/home_screen_content.dart';
-import 'package:adonai_2/widgets/tv/Loading_widget.dart';
+import 'package:adonai/bloc/sermons_state.dart';
+import 'package:adonai/bloc/sermons_bloc.dart';
+import 'package:adonai/models/Live_config.dart';
+import 'package:adonai/screens/tv/home_screen_content.dart';
+import 'package:adonai/widgets/tv/Loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

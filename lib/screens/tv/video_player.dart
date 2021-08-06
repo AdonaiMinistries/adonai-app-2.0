@@ -1,5 +1,5 @@
-import 'package:adonai_2/constants/theme_info.dart';
-import 'package:adonai_2/models/video_player_config.dart';
+import 'package:adonai/constants/theme_info.dart';
+import 'package:adonai/models/video_player_config.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

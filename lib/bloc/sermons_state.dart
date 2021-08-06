@@ -1,5 +1,5 @@
-import 'package:adonai_2/models/App_config.dart';
-import 'package:adonai_2/models/Sermons.dart';
+import 'package:adonai/models/App_config.dart';
+import 'package:adonai/models/Sermons.dart';
 
 ///
 /// List of sermon state.
@@ -7,6 +7,7 @@ import 'package:adonai_2/models/Sermons.dart';
 abstract class SermonsState {}
 
 class LoadingAppConfigState extends SermonsState {}
+
 class LoadedAppConfigState extends SermonsState {
   AppConfig appConfig;
 

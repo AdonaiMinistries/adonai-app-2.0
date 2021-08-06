@@ -1,4 +1,4 @@
-import 'package:adonai_2/app_navigator.dart';
+import 'package:adonai/app_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

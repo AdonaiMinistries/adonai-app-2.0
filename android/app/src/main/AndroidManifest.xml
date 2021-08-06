@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.adonai_2">
+    package="com.example.adonai">
    <application
         android:label="Adonai Church"
         android:banner="@drawable/church_logo"

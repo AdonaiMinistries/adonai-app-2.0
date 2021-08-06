@@ -1,6 +1,8 @@
-import 'package:adonai_2/bloc/sermons_event.dart';
-import 'package:adonai_2/bloc/sermons_state.dart';
-import 'package:adonai_2/services/https_network.dart';
+import 'package:adonai/bloc/sermons_event.dart';
+import 'package:adonai/bloc/sermons_state.dart';
+import 'package:adonai/bloc/sermons_event.dart';
+import 'package:adonai/bloc/sermons_state.dart';
+import 'package:adonai/services/https_network.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SermonsBloc extends Bloc<SermonsEvent, SermonsState> {
@@ -18,7 +20,6 @@ class SermonsBloc extends Bloc<SermonsEvent, SermonsState> {
 
         final sermons = await _dataService.getSermons(appConfig.config.token);
         yield LoadedSermonsState(sermons: sermons);
-
       } catch (e) {
         throw e;
       }

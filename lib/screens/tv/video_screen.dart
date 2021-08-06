@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:adonai_2/constants/theme_info.dart';
-import 'package:adonai_2/models/Sermon_config.dart';
-import 'package:adonai_2/models/Sermons.dart';
-import 'package:adonai_2/models/video_player_config.dart';
-import 'package:adonai_2/services/https_network.dart';
-import 'package:adonai_2/utils/string_utils.dart';
+import 'package:adonai/constants/theme_info.dart';
+import 'package:adonai/models/Sermon_config.dart';
+import 'package:adonai/models/Sermons.dart';
+import 'package:adonai/models/video_player_config.dart';
+import 'package:adonai/services/https_network.dart';
+import 'package:adonai/utils/string_utils.dart';
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

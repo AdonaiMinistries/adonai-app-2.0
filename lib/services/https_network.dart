@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:adonai_2/models/App_config.dart';
-import 'package:adonai_2/models/Sermon_config.dart';
-import 'package:adonai_2/models/Sermons.dart';
+import 'package:adonai/models/App_config.dart';
+import 'package:adonai/models/Sermon_config.dart';
+import 'package:adonai/models/Sermons.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -18,11 +18,11 @@ class DataService {
 
       /* There can be multiple pages, so need to fetch in loop from network. */
       do {
-        final Response response =
-            await http.get(Uri.parse(_baseUri + _uri), headers: {
-          "Authorization": "Bearer $token",
-          "Content-Type": "application/json"
-        });
+        final Response response = await http.get(Uri.parse(_baseUri + _uri),
+            headers: {
+              "Authorization": "Bearer $token",
+              "Content-Type": "application/json"
+            });
 
         Map<String, dynamic> json = jsonDecode(response.body);
         List<dynamic> body = json['data'];
@@ -57,7 +57,7 @@ class DataService {
     }
   }
 
-  Future<AppConfig> getFileFromServer() async{
+  Future<AppConfig> getFileFromServer() async {
     final String _baseUrl = 'www.adonaichurch.in';
 
     Uri uri = Uri.https(_baseUrl, '/app-config.json');

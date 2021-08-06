@@ -1,5 +1,5 @@
-import 'package:adonai_2/models/Sermon_config.dart';
-import 'package:adonai_2/services/https_network.dart';
+import 'package:adonai/models/Sermon_config.dart';
+import 'package:adonai/services/https_network.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SermonConfigCubit extends Cubit<SermonConfig> {

@@ -1,9 +1,9 @@
-import 'package:adonai_2/models/Sermons.dart';
-import 'package:adonai_2/models/video_player_config.dart';
-import 'package:adonai_2/screens/home.dart';
-import 'package:adonai_2/screens/tv/timer_clock.dart';
-import 'package:adonai_2/screens/tv/video_player.dart';
-import 'package:adonai_2/screens/tv/video_screen.dart';
+import 'package:adonai/models/Sermons.dart';
+import 'package:adonai/models/video_player_config.dart';
+import 'package:adonai/screens/home.dart';
+import 'package:adonai/screens/tv/timer_clock.dart';
+import 'package:adonai/screens/tv/video_player.dart';
+import 'package:adonai/screens/tv/video_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'models/Live_config.dart';
