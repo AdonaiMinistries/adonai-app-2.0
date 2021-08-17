@@ -12,3 +12,4 @@ build/
 .DS_Store
 .DS_Store
 *.lock
+build/.DS_Store
