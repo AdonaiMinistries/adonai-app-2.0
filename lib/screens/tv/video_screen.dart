@@ -176,7 +176,7 @@ class _VideoScreenState extends State<VideoScreen> {
                       isLive: false)),
               text: "PLAY"),
           SizedBox(width: MediaQuery.of(context).size.width * .02),
-          ButtonHandler(onPress: () {}, text: "SAVE FOR LATER"),
+          //ButtonHandler(onPress: () {}, text: "SAVE FOR LATER"),
         ],
       ),
     );
