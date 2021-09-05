@@ -1,84 +1,53 @@
-import 'dart:ui';
-
-import 'package:adonai/bloc/sermons_state.dart';
-import 'package:adonai/bloc/sermons_bloc.dart';
+import 'package:adonai/bloc/sermons/sermons_bloc.dart';
+import 'package:adonai/bloc/sermons/sermons_event.dart';
+import 'package:adonai/bloc/sermons/sermons_state.dart';
 import 'package:adonai/models/Live_config.dart';
-import 'package:adonai/screens/tv/home_screen_content.dart';
-import 'package:adonai/widgets/tv/Loading_widget.dart';
+import 'package:adonai/widgets/tv/home_screen_contents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TvHomeScreen extends StatefulWidget {
+  const TvHomeScreen({Key? key}) : super(key: key);
+
   @override
   _TvHomeScreenState createState() => _TvHomeScreenState();
 }
 
 class _TvHomeScreenState extends State<TvHomeScreen> {
-  late var _liveConfig;
+  var _liveConfig;
 
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black87,
       body: BlocBuilder<SermonsBloc, SermonsState>(builder: (context, state) {
-        if ((state is LoadingAppConfigState) ||
-            (state is LoadingSermonsState)) {
-          return _loadingWidget();
-        } else if ((state is LoadedSermonsState)) {
-          return _loadConent(state);
-        } else if (state is LoadedAppConfigState) {
-          return _getAppConfig(state);
-        } else {
-          return _errorWidget();
+        switch (state.runtimeType) {
+          case FetchingAppConfigState:
+          case FetchingSermonsState:
+            return Center(child: CircularProgressIndicator(color: Colors.red));
+
+          case FetchedAppConfigState:
+            /* App config is fetched now fetch sermons list.*/
+            BlocProvider.of<SermonsBloc>(context).add(FetchSermonsEvent(
+                token:
+                    (state as FetchedAppConfigState).appConfig.config.token));
+            _liveConfig = LiveConfig(
+                time: state.appConfig.config.stream.nextStream,
+                url: state.appConfig.config.stream.link);
+            return CircularProgressIndicator(color: Colors.red);
+
+          case FailedToFetchState:
+            return Container(
+                child: Center(
+                    child:
+                        Text((state as FailedToFetchState).error as String)));
+
+          default:
+            return HomeScreenContent(
+              sermons: (state as FetchedSermonsState).sermons,
+              liveConfig: _liveConfig,
+            );
         }
       }),
     );
-  }
-
-  Widget _displayHeroImage(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('images/tv_background.png'),
-            fit: BoxFit.fitWidth),
-      ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
-        child: Container(
-            decoration: BoxDecoration(color: Colors.white.withOpacity(00))),
-      ),
-    );
-  }
-
-  Widget _loadingWidget() {
-    return LoadingWidget();
-  }
-
-  Widget _loadConent(LoadedSermonsState state) {
-    return Stack(
-      children: <Widget>[
-        _displayHeroImage(context),
-        HomeScreenContent(
-          state: state,
-          liveConfig: _liveConfig,
-        ),
-      ],
-    );
-  }
-
-  Widget _getAppConfig(LoadedAppConfigState state) {
-    _liveConfig = LiveConfig(
-        url: state.appConfig.config.stream.link,
-        time: state.appConfig.config.stream.nextStream);
-    return _loadingWidget();
-  }
-
-  Widget _errorWidget() {
-    return Center(
-        child: Text(
-      "Failed to fetch data.",
-      style: TextStyle(color: Colors.white),
-    ));
   }
 }

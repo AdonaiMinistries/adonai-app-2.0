@@ -1,32 +1,50 @@
+import 'package:adonai/models/Live_config.dart';
 import 'package:adonai/models/Sermons.dart';
 import 'package:adonai/models/video_player_config.dart';
 import 'package:adonai/screens/home.dart';
+import 'package:adonai/screens/tv/home_screen.dart';
+import 'package:adonai/screens/tv/splash_screen.dart';
 import 'package:adonai/screens/tv/timer_clock.dart';
 import 'package:adonai/screens/tv/video_player.dart';
 import 'package:adonai/screens/tv/video_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'models/Live_config.dart';
+class RouteList {
+  static const String SPLASH_SCREEN = '/';
+  static const String HOME = '/home';
+  static const String HOME_SCREEN = '/homeScreen';
+  static const String VIDEO_DETAILS_SCREEN = '/VideoDetailsScreen';
+  static const String VIDEO_PLAYER_SCREEN = '/VideoPlayerScreen';
+  static const String TIMER_SCREEN = '/TimeScreen';
+}
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case RouteList.SPLASH_SCREEN:
+        return MaterialPageRoute(builder: (context) => SplashScreenTv());
+
+      case RouteList.HOME:
         return MaterialPageRoute(builder: (context) => Home());
-      case "/videoScreen":
-        // return MaterialPageRoute(builder: (context) => VidScreen(vidUrl: settings.arguments as String,));
+
+      case RouteList.HOME_SCREEN:
+        return MaterialPageRoute(builder: (context) => TvHomeScreen());
+
+      case RouteList.VIDEO_DETAILS_SCREEN:
         return MaterialPageRoute(
             builder: (context) =>
                 VideoScreen(sermon: settings.arguments as Sermon));
-      case "/videoPlayerScreen":
+
+      case RouteList.VIDEO_PLAYER_SCREEN:
         return MaterialPageRoute(
-            builder: (context) => VideoPlayerScreen(
+            builder: (context) => VidPlayerScreen(
                 videoConfig: settings.arguments as VideoConfig));
-      case "/timerClockScreen":
+
+      case RouteList.TIMER_SCREEN:
         return MaterialPageRoute(
-            builder: (context) => TimerClockScreen(
-                  liveConfig: settings.arguments as LiveConfig,
-                ));
+            builder: (context) =>
+                TimerClockScreen(liveConfig: settings.arguments as LiveConfig));
+
       default:
         return _errorRoute();
     }
@@ -45,21 +63,3 @@ Route<dynamic> _errorRoute() {
     );
   });
 }
-
-// class AppNavigator extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<NavCubit, String>(builder:(context, id){
-//       return Navigator(
-//         pages: [
-//           MaterialPage(child: TvHomeScreen()),
-//           if (id.isNotEmpty) MaterialPage(child: VideoScreen())
-//         ],
-//         onPopPage: (route, result){
-//           BlocProvider.of<NavCubit>(context).popToHomeScreen();
-//           return route.didPop(result);
-//         },
-//       );
-//     });
-//   }
-// }

@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:async';
 
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,9 @@ class _LoadingWidgetState extends State<LoadingWidget> {
         autoPlay: true,
         autoInitialize: true,
         showControls: false);
+
+    /* Start timer to check the play back. */
+    Timer(Duration(seconds: 4), () => _handleTimeOut());
   }
 
   void dispose() {
@@ -34,6 +37,12 @@ class _LoadingWidgetState extends State<LoadingWidget> {
   }
 
   Widget build(BuildContext context) {
-    return VideoPlayer(_videoPlayerController);
+    return Chewie(controller: _chewieController);
+  }
+
+  _handleTimeOut() {
+    setState(() {
+      Navigator.pop(context);
+    });
   }
 }

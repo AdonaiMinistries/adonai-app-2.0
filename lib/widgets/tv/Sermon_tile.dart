@@ -1,85 +1,80 @@
+import 'package:adonai/app_navigator.dart';
 import 'package:adonai/models/Sermons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SermonTile extends StatefulWidget {
-  final Sermon sermon;
+class SermonsListView extends StatefulWidget {
+  final List<Sermon> sermons;
+  const SermonsListView({Key? key, required this.sermons}) : super(key: key);
 
-  const SermonTile({Key? key, required this.sermon}) : super(key: key);
-  _SermonTileState createState() => _SermonTileState();
+  @override
+  _SermonsListViewState createState() => _SermonsListViewState();
 }
 
-class _SermonTileState extends State<SermonTile> {
+class _SermonsListViewState extends State<SermonsListView> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: GridView.count(
+      shrinkWrap: false,
+      crossAxisCount: 4,
+      crossAxisSpacing: 04,
+      // mainAxisSpacing: 10,
+      childAspectRatio: 1.8,
+      children: widget.sermons
+          .map((sermon) => SermonTileCard(sermon: sermon))
+          .toList(),
+    ));
+  }
+}
+
+class SermonTileCard extends StatefulWidget {
+  final Sermon sermon;
+  const SermonTileCard({Key? key, required this.sermon}) : super(key: key);
+
+  @override
+  _SermonTileCardState createState() => _SermonTileCardState();
+}
+
+class _SermonTileCardState extends State<SermonTileCard> {
   var _focus = FocusNode();
-  bool _isFocused = false;
-
-  void _onFocusChange() {
-    setState(() {
-      if (_focus.hasFocus) {
-        _isFocused = true;
-      } else {
-        _isFocused = false;
-      }
-    });
-  }
-
-  void _handleKeyEvent(RawKeyEvent event) {
-    if ((event.physicalKey == PhysicalKeyboardKey.mediaPlayPause) ||
-        (event.physicalKey == PhysicalKeyboardKey.select) ||
-        (event.logicalKey == LogicalKeyboardKey.select)) {
-      Navigator.of(context).pushNamed("/videoScreen", arguments: widget.sermon);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _focus.addListener(_onFocusChange);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _focus.dispose();
-  }
+  var _isFocused = false;
 
   Widget build(BuildContext context) {
     return RawKeyboardListener(
-      focusNode: _focus,
       onKey: _handleKeyEvent,
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
-        foregroundDecoration: BoxDecoration(
-          color: (_isFocused) ? Colors.transparent : Colors.black54,
-        ),
-        curve: Curves.fastOutSlowIn,
-        child: InkWell(
-          onTap: () => Navigator.of(context)
-              .pushNamed("/videoScreen", arguments: widget.sermon),
-          child: Stack(children: <Widget>[
-            _loadSermonImage(context),
-            Center(
-                child: (_isFocused)
-                    ? Container(
-                        width: MediaQuery.of(context).size.width * .04,
-                        color: Colors.black54,
-                        child: Icon(
-                          Icons.play_arrow,
-                          color: Colors.white,
-                        ),
-                      )
-                    : Container())
-          ]),
+      focusNode: _focus,
+      child: InkWell(
+        child: Card(
+          color: (_isFocused) ? Colors.white : Colors.transparent,
+          child: _sermonImage(context),
         ),
       ),
     );
   }
 
-  Widget _loadSermonImage(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(5),
+  void initState() {
+    super.initState();
+    /* Initialize the focus. */
+    _focus.addListener(
+        () => setState(() => _isFocused = (_focus.hasFocus) ? true : false));
+  }
+
+  void dispose() {
+    super.dispose();
+    _focus.dispose();
+  }
+
+  _sermonImage(contex) => Container(
+        decoration: BoxDecoration(
+            borderRadius:
+                BorderRadius.circular(MediaQuery.of(context).size.width * .02),
+            border: Border.all(
+                color: (_isFocused) ? Colors.white : Colors.transparent,
+                width: MediaQuery.of(context).size.width * .004)),
         child: CachedNetworkImage(
+          fit: BoxFit.cover,
           imageUrl: widget.sermon.thumbnails[3].url,
           placeholder: (contex, url) => Center(
             child: CircularProgressIndicator(
@@ -87,6 +82,16 @@ class _SermonTileState extends State<SermonTile> {
             ),
           ),
           errorWidget: (context, url, error) => Icon(Icons.error),
-        ));
+        ),
+      );
+
+  _handleKeyEvent(RawKeyEvent event) {
+    if ((event.physicalKey == PhysicalKeyboardKey.mediaPlayPause) ||
+        (event.physicalKey == PhysicalKeyboardKey.select) ||
+        (event.logicalKey == LogicalKeyboardKey.select) ||
+        (event.physicalKey == PhysicalKeyboardKey.mediaPlay)) {
+      Navigator.of(context)
+          .pushNamed(RouteList.VIDEO_DETAILS_SCREEN, arguments: widget.sermon);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:adonai/app_navigator.dart';
 import 'package:adonai/constants/theme_info.dart';
 import 'package:adonai/models/Live_config.dart';
 import 'package:adonai/models/video_player_config.dart';
@@ -20,13 +21,15 @@ class _TimerClockScreenState extends State<TimerClockScreen> {
   late DateTime _liveTime;
   late bool _timeout = false;
   late var _timer;
-  // String url =
-  //     "https://skyfire.vimeocdn.com/1627757115-0xf2876e784a9645c0626a0d312532f2429bc4f530/d9a13455-2e4c-4a02-afde-ef4dda419692/sep/video/192f4873,51907f43,55b9af24,b748e73e,fdf8a33f/audio/36e1bb16,e944b5da/master.m3u8?query_string_ranges=1";
 
   /* Initialise the timer. */
   initState() {
     super.initState();
-    _liveTime = DateFormat.yMd().add_jms().parse(widget.liveConfig.time);
+    if (widget.liveConfig.time != "") {
+      _liveTime = DateFormat.yMd().add_jms().parse(widget.liveConfig.time);
+    } else {
+      _liveTime = DateTime.now();
+    }
     _getTimeDifference(null, _liveTime);
     _timer = Timer.periodic(
         Duration(seconds: 1), (Timer t) => _getTimeDifference(t, _liveTime));
@@ -85,7 +88,12 @@ class _TimerClockScreenState extends State<TimerClockScreen> {
     );
   }
 
-  _naviagteToVideoPlayer(context) => VideoPlayerScreen(
-        videoConfig: new VideoConfig(url: widget.liveConfig.url, isLive: true),
-      );
+  _naviagteToVideoPlayer(context) {
+    return VidPlayerScreen(
+        videoConfig: VideoConfig(
+      title: "",
+      isLive: true,
+      url: widget.liveConfig.url,
+    ));
+  }
 }
