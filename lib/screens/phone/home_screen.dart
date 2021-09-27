@@ -1,3 +1,4 @@
+import 'package:adonai/screens/phone/navigationbar.dart';
 import 'package:flutter/material.dart';
 
 class PhoneHomeScreen extends StatelessWidget {
@@ -7,8 +8,8 @@ class PhoneHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('PHONE HOME SCREEN'),
-    );
+   return MaterialApp(title:'Bottom nav bar',
+   home:NavigationBar());
+
   }
 }
