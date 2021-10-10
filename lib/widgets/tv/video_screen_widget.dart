@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:adonai/app_navigator.dart';
 import 'package:adonai/constants/theme_info.dart';
+import 'package:adonai/constants/tv_constants.dart';
 import 'package:adonai/models/Sermons.dart';
 import 'package:adonai/models/video_player_config.dart';
 import 'package:adonai/services/https_network.dart';
 import 'package:adonai/utils/string_utils.dart';
+import 'package:adonai/utils/video.dart';
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -160,10 +162,11 @@ class _VideoDetailsWidgetState extends State<VideoDetailsWidget> {
               onPress: () => Navigator.of(context).pushNamed(
                   RouteList.VIDEO_PLAYER_SCREEN,
                   arguments: VideoConfig(
-                    title: widget.sermon.title,
-                    isLive: false,
-                    url: sermonConfig.request.files.hls.cdns.fastlySkyfire.url,
-                  )),
+                      title: widget.sermon.title,
+                      isLive: false,
+                      // url: sermonConfig.request.files.hls.cdns.fastlySkyfire.url,
+                      url: getUrlByPixel(sermonConfig.request.files.progressive,
+                          VideoPixels.PIXEL_720P))),
               text: "PLAY"),
           SizedBox(width: MediaQuery.of(context).size.width * .02),
           ButtonHandler(onPress: () {}, text: "SAVE FOR LATER"),

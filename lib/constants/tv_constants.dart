@@ -14,6 +14,14 @@ class VideoPlayerConstants {
   static const int SEEK_BY = 5;
 }
 
+class VideoPixels {
+  static const String PIXEL_240P = "240p";
+  static const String PIXEL_360P = "360p";
+  static const String PIXEL_540P = "540p";
+  static const String PIXEL_720P = "720p";
+  static const String PIXEL_1080P = "1080p";
+}
+
 class TvDpadConstants {
   isMediaPlayPauseKey(event) {
     if ((event.physicalKey == PhysicalKeyboardKey.mediaPlayPause) ||
