@@ -31,9 +31,9 @@ class _LoadingWidgetState extends State<LoadingWidget> {
   }
 
   void dispose() {
-    super.dispose();
-    _videoPlayerController.dispose();
     _chewieController.dispose();
+    _videoPlayerController.dispose();
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -42,6 +42,8 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
   _handleTimeOut() {
     setState(() {
+      _chewieController.pause();
+      _videoPlayerController.pause();
       Navigator.pop(context);
     });
   }
