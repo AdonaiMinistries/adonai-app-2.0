@@ -40,6 +40,8 @@ dependencies:
   wakelock: ^0.5.2
   webview_flutter: ^2.0.9
   getwidget: ^2.0.4
+  google_maps_flutter: ^2.1.0
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +55,7 @@ flutter:
     - images/
     - videos/
     - assets/
+    - assets/dark.json
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

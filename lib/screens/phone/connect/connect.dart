@@ -1,32 +1,46 @@
 import 'package:adonai/screens/phone/connect/daughtersofzion.dart';
+import 'package:adonai/screens/phone/data.dart';
+import 'package:adonai/screens/phone/models/ConnectPageCard.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+
+import 'connectCard.dart';
 
 class ConnectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0,0,20,20),
+      padding: const EdgeInsets.fromLTRB(20.0, 0, 20, 20),
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: ListView(
+        body: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 "CHURCH",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.grey[500],
-                    fontSize: 30),
+                style: TextStyle(color: Colors.grey[500], fontSize: 30),
               ),
             ),
 
             //tempCard(),
-            buildImageInteractionCard(context),
-            buildImageInteractionCard(context),
-            buildImageInteractionCard(context),
-         
-   
+
+            Flexible(
+              child: ListView(
+                // scrollDirection: Axis.vertical,
+                // shrinkWrap: true,
+                children: pages.map((page) {
+                  return ConnectCard(name: page.name);
+                }).toList(),
+              ),
+            ),
+
+            //buildImageI
+            //nteractionCard(context,data: data),
+            //buildImageInteractionCard(context,data: data),
+            //buildImageInteractionCard(context,data: data),
 
             // Card(
             //   clipBehavior: Clip.antiAlias,
@@ -144,15 +158,11 @@ class ConnectPage extends StatelessWidget {
       );
 
   Widget buildImageInteractionCard(BuildContext context) => InkWell(
-    onTap:(){
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => DaughtersOfZion()));
-
-},
-
-    
-    child: Card(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => DaughtersOfZion()));
+        },
+        child: Card(
           shadowColor: Colors.grey,
           elevation: 6,
           clipBehavior: Clip.antiAlias,
@@ -166,10 +176,10 @@ class ConnectPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(25, 25, 25, 7),
                     child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-    child: Image(
-      image: AssetImage('assets/img1.jpg'),
-    ),
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image(
+                        image: AssetImage('assets/img1.jpg'),
+                      ),
                     ),
                   ),
                   // Ink.image(
@@ -193,26 +203,22 @@ class ConnectPage extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(25,10, 25,5),
-                child: 
-                Align(
+                padding: EdgeInsets.fromLTRB(25, 10, 25, 5),
+                child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'CELL GROUP',
-                    style: TextStyle(fontSize: 16,
-                    color: Colors.grey),
-                    textAlign:TextAlign.left,
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ),
-  
+
               Padding(
-                padding: EdgeInsets.fromLTRB(25,5, 25,25),
-                child: 
-                Text(
+                padding: EdgeInsets.fromLTRB(25, 5, 25, 25),
+                child: Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Proin a fringilla odio. Phasellus sed maximus urna. Curabitur bibe',
-                  style: TextStyle(fontSize: 12,
-                  color: Colors.grey),
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
               // ButtonBar(
@@ -228,10 +234,8 @@ class ConnectPage extends StatelessWidget {
               //     )
               //   ],
               // )
-              
             ],
-            
           ),
         ),
-  );
+      );
 }
