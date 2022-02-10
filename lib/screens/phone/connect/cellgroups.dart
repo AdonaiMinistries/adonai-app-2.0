@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:adonai/screens/phone/components/cellgroupdata.dart';
+import 'package:adonai/screens/phone/components/circleCell.dart';
 import 'package:adonai/screens/phone/constants.dart';
 import 'package:flutter/services.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
@@ -9,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:developer';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CellGroup extends StatefulWidget {
   CellGroup({Key? key}) : super(key: key);
@@ -48,6 +51,44 @@ class _CellGroupState extends State<CellGroup> {
     "assets/img1.jpg",
   ];
 
+  List<CellGroupData> cell = [
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Koramanagala",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Sarjapur",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Whitefield",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Jaynagar",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Cox Town",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Koramanagala",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Koramanagala",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Koramanagala",
+    ),
+    new CellGroupData(
+      "assets/img1.jpg",
+      "Koramanagala",
+    ),
+  ];
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(12.993889695337586, 77.62481619031142),
     zoom: 14.4746,
@@ -115,6 +156,7 @@ class _CellGroupState extends State<CellGroup> {
               ),
             ),
           ),
+
           GFCarousel(
             //autoPlay:true;
             autoPlay: true,
@@ -159,17 +201,16 @@ class _CellGroupState extends State<CellGroup> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Padding(
-                  padding:  EdgeInsets.all(bw*7),
+                  padding: EdgeInsets.fromLTRB(bw * 7, bw * 5, bw * 7, bw),
                   child: Container(
-                      height: bh * 50,
-
+                    height: bh * 50,
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-          bottomRight: Radius.circular(30),
-          bottomLeft: Radius.circular(30),
-        ),
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                        bottomRight: Radius.circular(30),
+                        bottomLeft: Radius.circular(30),
+                      ),
                       // decoration: BoxDecoration(
                       //     borderRadius: BorderRadius.all(Radius.circular(50))),
                       child: GoogleMap(
@@ -192,136 +233,111 @@ class _CellGroupState extends State<CellGroup> {
                     ),
                   ),
                 ),
-                SizedBox(height: bh * 5),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 60, 0),
-                          child: Container(
-                            padding: EdgeInsets.only(
-                              bottom: 3, // space between underline and text
-                            ),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                              color: Colors.grey[500]!, // Text colour here
-                              width: 1.0, // Underline width
-                            ))),
-                            child: Text(
-                              'GET IN TOUCH WITH US',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black54,
-                                letterSpacing: 3,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        SelectableText(
-                          _contact,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            height: 1.2,
-                            fontSize: 16,
-                            color: Colors.black54,
-                          ),
-                        ),
-                        SizedBox(height: 40),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 210, 0),
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                bottom: 3,
-                                right: 50 // space between underline and text
-                                ),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                              color: Colors.grey[500]!, // Text colour here
-                              width: 1.0, // Underline width
-                            ))),
-                            child: Text(
-                              'ADDRESS',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black54,
-                                letterSpacing: 3,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        SelectableText(
-                          _addr,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            height: 1.2,
-                            fontSize: 16,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.normal,
-                            // letterSpacing: 3,
-
-                            // wordSpacing: 3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ]),
-          // floatingActionButton: Column(
-          //   mainAxisAlignment: MainAxisAlignment.end,
-          //   children: [
-          //     Align(
-          //       alignment: Alignment.bottomRight,
-          //       child: FloatingActionButton.extended(
-          //         onPressed: () {
-          //           _launchPhoneURL(_phoneno);
-          //         },
-          //         label: Text('Call'),
-          //         icon: Icon(Icons.phone),
-          //         backgroundColor: Colors.grey[500]!,
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       height: 10,
-          //     ),
-          //     Align(
-          //       alignment: Alignment.bottomRight,
-          //       child: FloatingActionButton.extended(
-          //           // shape: new RoundedRectangleBorder(
-          //           //   borderRadius: new BorderRadius.circular(40.0),
-          //           // ) ,
-          //           onPressed: () {
-          //             _launchMailURL(_mail);
-          //           },
-          //           label: Text('Email'),
-          //           icon: Icon(Icons.mail),
-          //           backgroundColor: Colors.grey[500]!),
-          //     ),
-          //     SizedBox(
-          //       height: 10,
-          //     ),
-          //     Align(
-          //       alignment: Alignment.bottomRight,
-          //       child: FloatingActionButton.extended(
-          //         onPressed: () {
-          //           navigateTo(12.993889695337586, 77.62481619031142);
-          //         },
-          //         label: Text('Open in Maps'),
-          //         icon: Icon(Icons.map),
-          //         backgroundColor: Colors.grey[500]!,
-          //       ),
-          //     ),
-          //   ],
+          //   CarouselSlider(
+          //   options: CarouselOptions(
+          //     height: 200.0,
+          //     autoPlay: true,
+          //     autoPlayInterval: Duration(seconds: 3),
+          //     autoPlayAnimationDuration: Duration(milliseconds: 800),
+          //     autoPlayCurve: Curves.fastOutSlowIn,
+          //     pauseAutoPlayOnTouch: true,
+          //     aspectRatio: 2.0,
+          //     onPageChanged: (index, reason) {
+          //       setState(() {
+          //         _currentIndex = index;
+          //       });
+          //     },
+          //   ),
+          //   items: imageList.map((card){
+          //     return Builder(
+          //       builder:(BuildContext context){
+          //         return Container(
+          //           height: MediaQuery.of(context).size.height*0.30,
+          //           width: MediaQuery.of(context).size.width,
+          //           child: Card(
+          //             color: Colors.blueAccent,
+          //             child: card,
+          //           ),
+          //         );
+          //       }
+          //     );
+          //   }).toList(),
           // ),
+          SizedBox(height: bh * 4),
+          Padding(
+            padding: EdgeInsets.fromLTRB(bw * 7, 0, 0, bw ),
+            child: Container(
+                width: double.infinity,
+                height: 150.0,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    for (var c in cell) circleCell(c, context),
+                  ],
+                )),
+          ),
+          Container(
+            child: Card(
+              child: Container(
+                height: 100,
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(bw),
+                        child: Expanded(
+                          child: Image.asset(imageList[0]),
+                          flex: 2,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: ListTile(
+                                
+                                subtitle: Text(" 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a fringilla odio. Phasellus sed maximus urna. Curabitur bibendum sollicitudin nisi, sit amet rhoncus massa elementum a. Aliquam erat volutpat. Nullam vitae felis eget ',"),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  
+                                  // TextButton(
+                                  //   child: Text("PLAY"),
+                                  //   onPressed: () {},
+                                  // ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  // TextButton(
+                                  //   child: Text("ADD TO QUEUE"),
+                                  //   onPressed: () {},
+                                  // ),
+                                  SizedBox(
+                                    width: 8,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      flex: 8,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ]));
   }
 
