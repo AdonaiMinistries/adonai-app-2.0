@@ -51,7 +51,7 @@ class DaughtersOfZion extends StatelessWidget {
           GFCarousel(
             //autoPlay:true;
             autoPlay: true,
-            pagination: true,
+            hasPagination: true,
             viewportFraction: 1.0,
             aspectRatio: 2,
 

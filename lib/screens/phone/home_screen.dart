@@ -9,7 +9,7 @@ class PhoneHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    return MaterialApp(title:'Bottom nav bar',
-   home:NavigationBar());
+   home:NavigationBarMain());
 
   }
 }

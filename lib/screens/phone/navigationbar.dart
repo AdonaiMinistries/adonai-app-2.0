@@ -6,17 +6,17 @@ import 'package:adonai/screens/phone/connect/tinystars.dart';
 import 'package:adonai/screens/phone/tab_navigator.dart';
 import 'package:flutter/material.dart';
 
-class NavigationBar extends StatefulWidget {
-  const NavigationBar({Key? key}) : super(key: key);
+class NavigationBarMain extends StatefulWidget {
+  const NavigationBarMain({Key? key}) : super(key: key);
 
   @override
   _NavigationBarState createState() => _NavigationBarState();
 }
 
-class _NavigationBarState extends State<NavigationBar> {
+class _NavigationBarState extends State<NavigationBarMain> {
   int _selectedIndex = 0;
   String _currentPage = "ConnectPage";
-  List <String> pageKeys=["ConnectPage","DaughtersOfZion","TinyStars","AdonaiBuildingProject","random2"];
+  List <String> pageKeys=["ConnectPage","DaughtersOfZion","TinyStars","AdonaiBuildingProject","HomePage"];
   Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
     "ConnectPage": GlobalKey<NavigatorState>(),
     "DaughtersOfZion": GlobalKey<NavigatorState>(),
@@ -24,7 +24,7 @@ class _NavigationBarState extends State<NavigationBar> {
     "AdonaiBuildingProject": GlobalKey<NavigatorState>(),
     "CellGroup": GlobalKey<NavigatorState>(),
 
-    "random2": GlobalKey<NavigatorState>(),
+    "Home": GlobalKey<NavigatorState>(),
   };
   List<Widget> _widgetOptions = <Widget>[
     ConnectPage(),

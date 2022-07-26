@@ -1,3 +1,4 @@
+import 'package:adonai/screens/phone/components/SizeConfig.dart';
 import 'package:adonai/screens/phone/navigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -17,13 +18,13 @@ class PrayerNight extends StatelessWidget {
   //   "https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
   //   "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
   // ];
-    final List<String> imageList = [
+  final List<String> imageList = [
     "assets/img1.jpg",
     "assets/img1.jpg",
-        "assets/img1.jpg",
-        "assets/img1.jpg",
-        "assets/img1.jpg",
-        "assets/img1.jpg",
+    "assets/img1.jpg",
+    "assets/img1.jpg",
+    "assets/img1.jpg",
+    "assets/img1.jpg",
   ];
   List<String> images = [
     "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
@@ -35,6 +36,11 @@ class PrayerNight extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    // double _height=MediaQuery.of(context).size.height;
+    // double _width=MediaQuery.of(context).size.width;
+    double hb = SizeConfig.blockSizeVertical;
+    double wb = SizeConfig.blockSizeHorizontal;
     return Scaffold(
         backgroundColor: Colors.white,
         body: ListView(children: [
@@ -52,7 +58,7 @@ class PrayerNight extends StatelessWidget {
           GFCarousel(
             //autoPlay:true;
             autoPlay: true,
-            pagination: true,
+            hasPagination: true,
             viewportFraction: 1.0,
             aspectRatio: 2,
 
@@ -110,21 +116,201 @@ class PrayerNight extends StatelessWidget {
               ),
             ),
           ),
-
+          SizedBox(height: hb * 3),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(50,10,50,20),
+          //   child: Center(
+          //     child: Container(
+          //       height: MediaQuery.of(context).copyWith().size.height / 9,
+          //       padding: EdgeInsets.fromLTRB(90, 5, 90, 5),
+          //       decoration: BoxDecoration(
+          //           border: Border.all(
+          //             color: Colors.grey[300]!,
+          //           ),
+          //           borderRadius: BorderRadius.all(Radius.circular(20))),
+          //     ),
+          //   ),
+          // ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(50,10,50,20),
-            child: Center(
-              child: Container(
-                height: MediaQuery.of(context).copyWith().size.height / 9,
-                padding: EdgeInsets.fromLTRB(90, 5, 90, 5),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey[300]!,
+            padding: const EdgeInsets.fromLTRB(50, 10, 50, 20),
+            // child: Center(
+            child: Container(
+              height: MediaQuery.of(context).copyWith().size.height / 9,
+              padding: EdgeInsets.fromLTRB(wb * 2, 5, wb * 2, 5),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey[300]!,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: IntrinsicHeight(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                        height: hb * 10,
+                        width: hb * 10,
+                        child: Column(
+                          children: [
+                            Text(
+                              "24",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppColors.PRIMARY_COLOR_DARK,
+                                  fontSize: hb * 6.5),
+                            ),
+                            Text(
+                              "OCTOBER",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppColors.PRIMARY_COLOR_DARK,
+                                  fontSize: hb * 1.5),
+                            ),
+                          ],
+                        )),
+                    VerticalDivider(
+                      thickness: wb * 0.3,
+                      width: wb * 4,
+                      indent: hb * 0.8,
+                      endIndent: hb * 0.8,
+                      color: Colors.grey[300],
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                    Padding(
+                      padding:
+                          EdgeInsets.fromLTRB(wb * 0.8, wb * 2.5, wb * 0.5, wb),
+                      child: Container(
+                          //color: Colors.blue,
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          width: MediaQuery.of(context).size.width * 0.405,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "PROGRAM THEME",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: AppColors.PRIMARY_COLOR_DARK,
+                                    fontSize: MediaQuery.of(context).size.width * 0.045),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.pin_drop,
+                                    color: AppColors.RED_COLOR,
+                                    size: hb * 2.5,
+                                  ),
+                                  Text(
+                                    "Adonai Church",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        color: AppColors.PRIMARY_COLOR_DARK,
+                                        fontSize: MediaQuery.of(context).size.width * 0.035),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )),
+                    ),
+                    // Container(
+                    //   color: Colors.blue,
+                    //   height: 100,
+                    //   width: 100,
+                    // ),
+                  ],
+                ),
               ),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(50, 10, 50, 20),
+            // child: Center(
+            child: Container(
+              height: MediaQuery.of(context).copyWith().size.height / 9,
+              padding: EdgeInsets.fromLTRB(wb * 2, 5, wb * 2, 5),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey[300]!,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: IntrinsicHeight(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                        height: hb * 10,
+                        width: hb * 10,
+                        child: Column(
+                          children: [
+                            Text(
+                              "24",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppColors.PRIMARY_COLOR_DARK,
+                                  fontSize: hb * 6.5),
+                            ),
+                            Text(
+                              "OCTOBER",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppColors.PRIMARY_COLOR_DARK,
+                                  fontSize: hb * 1.5),
+                            ),
+                          ],
+                        )),
+                    VerticalDivider(
+                      thickness: wb * 0.3,
+                      width: wb * 4,
+                      indent: hb * 0.8,
+                      endIndent: hb * 0.8,
+                      color: Colors.grey[300],
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.fromLTRB(wb * 0.8, wb * 2.5, wb * 0.5, wb),
+                      child: Container(
+                        //  _height=MediaQuery.of(context).size.height;
+                        //  _width=MediaQuery.of(context).size.width;
+                          //color: Colors.blue,
+                          height: hb * 10,
+                          width: wb * 40,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "PROGRAM THEME",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: AppColors.PRIMARY_COLOR_DARK,
+                                    fontSize: MediaQuery.of(context).size.width * 0.045),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.pin_drop,
+                                    color: AppColors.RED_COLOR,
+                                    size: hb * 2.5,
+                                  ),
+                                  Text(
+                                    "Adonai Church",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        color: AppColors.PRIMARY_COLOR_DARK,
+                                        fontSize:  MediaQuery.of(context).size.width * 0.035),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                          ),
+                    ),
+                    // Container(
+                    //   color: Colors.blue,
+                    //   height: 100,
+                    //   width: 100,
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //)
         ]));
   }
 }

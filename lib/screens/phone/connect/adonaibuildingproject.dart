@@ -1,3 +1,4 @@
+import 'package:adonai/screens/phone/components/SizeConfig.dart';
 import 'package:adonai/screens/phone/navigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -35,6 +36,10 @@ class AdonaiBuildingProject extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+
+    SizeConfig().init(context);
+    double hb = SizeConfig.blockSizeVertical;
+    double wb = SizeConfig.blockSizeHorizontal;
     return Scaffold(
         backgroundColor: Colors.white,
         body: ListView(children: [
@@ -54,7 +59,7 @@ class AdonaiBuildingProject extends StatelessWidget {
           GFCarousel(
             //autoPlay:true;
             autoPlay: true,
-            pagination: true,
+            hasPagination: true,
             viewportFraction: 1.0,
             aspectRatio: 2,
 
@@ -131,29 +136,33 @@ class AdonaiBuildingProject extends StatelessWidget {
                               fit: BoxFit.cover))),
 
                   Container(
+                    // height: wb*0.5,
+                    // width: hb*0.5,
+                    //color: Colors.black,
                       child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        padding:  EdgeInsets.fromLTRB(hb, hb,hb*0.5,hb*0.3 ),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'PRAY',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: AppColors.PRIMARY_COLOR, fontSize: 25),
+                                color: AppColors.PRIMARY_COLOR, fontSize: wb*7),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 2, 2, 2),
+                        padding:  EdgeInsets.fromLTRB(hb, hb*0.1, hb*0.5, hb*0.3),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a fringilla odio. Phasellus sed maximus urn ',
                             textAlign: TextAlign.left,
+                            //overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: AppColors.PRIMARY_COLOR, fontSize: 12),
+                                color: AppColors.PRIMARY_COLOR, fontSize: MediaQuery.of(context).size.width*0.025),
                           ),
                         ),
                       ),
@@ -180,7 +189,8 @@ class AdonaiBuildingProject extends StatelessWidget {
                         ),
                       ),
                     ],
-                  )),
+                  )
+                  ),
                   // decoration: new BoxDecoration(
                   //     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   //     image: new DecorationImage(
@@ -192,26 +202,26 @@ class AdonaiBuildingProject extends StatelessWidget {
                       child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        padding:EdgeInsets.fromLTRB(hb, hb,hb*0.5,hb*0.3),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'PROMOTE',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: AppColors.PRIMARY_COLOR, fontSize: 25),
+                                color: AppColors.PRIMARY_COLOR, fontSize: wb*7),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 2, 2, 2),
+                        padding:  EdgeInsets.fromLTRB(hb, hb*0.1, hb*0.5, hb*0.3),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a fringilla odio. Phasellus sed maximus urn ',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: AppColors.PRIMARY_COLOR, fontSize: 12),
+                                color: AppColors.PRIMARY_COLOR, fontSize: MediaQuery.of(context).size.width*0.025),
                           ),
                         ),
                       ),
@@ -255,26 +265,26 @@ class AdonaiBuildingProject extends StatelessWidget {
                       child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        padding: EdgeInsets.fromLTRB(hb, hb,hb*0.5,hb*0.3),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'CONTRIBUTE',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: AppColors.PRIMARY_COLOR, fontSize: 24),
+                                color: AppColors.PRIMARY_COLOR, fontSize: wb*5.5),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 2, 2, 2),
+                        padding: EdgeInsets.fromLTRB(hb, hb*0.1, hb*0.5, hb*0.3),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a fringilla odio. Phasellus sed maximus urn ',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: AppColors.PRIMARY_COLOR, fontSize: 12),
+                                color: AppColors.PRIMARY_COLOR, fontSize: MediaQuery.of(context).size.width*0.025),
                           ),
                         ),
                       ),
